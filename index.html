@@ -3,124 +3,232 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Тест по словах: Navigate A2 Unit 9</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <title>Тест по словам Unit 9</title>
     <style>
+        :root {
+            --bg-color: #0f172a;
+            --card-bg: #1e293b;
+            --primary: #6366f1;
+            --primary-hover: #4f46e5;
+            --accent: #22c55e;
+            --danger: #ef4444;
+            --text: #f8fafc;
+            --text-muted: #94a3b8;
+            --border: #334155;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+        }
+
         body {
-            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
         }
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
+
+        .container {
+            width: 100%;
+            max-width: 600px;
+            background-color: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 30px;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
         }
-        .animate-fade-in {
-            animation: fadeIn 0.3s ease-out forwards;
+
+        h1 {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            text-align: center;
+            color: var(--text);
+        }
+
+        .stats-bar {
+            display: flex;
+            justify-content: space-between;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-bottom: 20px;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 10px;
+        }
+
+        .word-display {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .target-word {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 5px;
+            cursor: pointer;
+            display: inline-block;
+        }
+
+        .target-word:hover {
+            opacity: 0.8;
+        }
+
+        .hint {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+
+        .options-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .option-btn {
+            background-color: #2b3b55;
+            color: var(--text);
+            border: 2px solid var(--border);
+            padding: 15px 20px;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-align: left;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .option-btn:hover {
+            border-color: var(--primary);
+            background-color: #334768;
+        }
+
+        .option-btn.selected {
+            border-color: var(--primary);
+            background-color: var(--primary);
+            color: white;
+        }
+
+        .option-btn.correct {
+            border-color: var(--accent);
+            background-color: var(--accent);
+            color: white;
+        }
+
+        .option-btn.wrong {
+            border-color: var(--danger);
+            background-color: var(--danger);
+            color: white;
+        }
+
+        .action-container {
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        .btn-next {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 1rem;
+            cursor: pointer;
+            font-weight: 600;
+            transition: background 0.2s;
+            display: none;
+        }
+
+        .btn-next:hover {
+            background-color: var(--primary-hover);
+        }
+
+        .results-screen {
+            text-align: center;
+            display: none;
+        }
+
+        .results-screen h2 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            color: var(--primary);
+        }
+
+        .results-stats {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            line-height: 1.8;
+        }
+
+        .btn-restart {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+        .btn-restart:hover {
+            background-color: var(--primary-hover);
         }
     </style>
 </head>
-<body class="bg-gradient-to-br from-indigo-50 via-purple-50 to-pink-50 min-h-screen flex items-center justify-center p-4">
+<body>
 
-    <div id="app" class="w-full max-w-xl bg-white shadow-2xl rounded-3xl p-6 md:p-8 border border-gray-100 transition-all duration-300">
+    <div class="container">
+        <h1>Тест по словам: Unit 9</h1>
         
-        <!-- Welcome Screen -->
-        <div id="welcome-screen" class="text-center py-6">
-            <div class="inline-flex items-center justify-center w-16 h-16 bg-indigo-100 text-indigo-600 rounded-2xl mb-4 text-3xl shadow-inner">
-                📚
-            </div>
-            <h1 class="text-2xl md:text-3xl font-bold text-gray-800 mb-2">Unit 9: Vocabulary Test</h1>
-            <p class="text-gray-500 mb-6 text-sm md:text-base">Проверь свои знания английских слов из учебника Navigate A2. Тебя ждет случайный порядок вопросов, 4 варианта ответа и подсчет ошибок!</p>
-            
-            <div class="bg-indigo-50/50 p-4 rounded-2xl mb-6 text-left border border-indigo-100/60">
-                <h3 class="font-semibold text-indigo-900 text-sm mb-2">Правила теста:</h3>
-                <ul class="text-xs md:text-sm text-indigo-700 space-y-1 list-disc list-inside">
-                    <li>Всего вопросов: <span id="total-words-count" class="font-bold">51</span> слово</li>
-                    <li>В каждом вопросе 1 правильный ответ и 3 случайных</li>
-                    <li>В конце выведется подробная статистика ошибок</li>
-                </ul>
+        <div id="quiz-screen">
+            <div class="stats-bar">
+                <span id="progress-text">Слово: 1 / 54</span>
+                <span id="errors-text">Ошибок: 0</span>
             </div>
 
-            <button onclick="startQuiz()" class="w-full py-3.5 px-6 bg-gradient-to-r from-indigo-600 to-violet-600 hover:from-indigo-700 hover:to-violet-700 text-white font-semibold rounded-2xl shadow-lg shadow-indigo-500/25 transition-all transform active:scale-95">
-                Начать тест 🚀
-            </button>
+            <div class="word-display">
+                <div class="target-word" id="target-word" onclick="speakCurrentWord()" title="Нажмите, чтобы прослушать">word</div>
+                <div class="hint">🔊 Нажмите на слово для озвучки. Кликните вариант ответа один раз для выбора, второй раз — для подтверждения.</div>
+            </div>
+
+            <div class="options-grid" id="options-grid">
+                <!-- Варианты генерируются динамически -->
+            </div>
+
+            <div class="action-container">
+                <button class="btn-next" id="btn-next" onclick="nextQuestion()">Следующее слово ➔</button>
+            </div>
         </div>
 
-        <!-- Quiz Screen (Hidden by default) -->
-        <div id="quiz-screen" class="hidden">
-            <!-- Header Progress -->
-            <div class="flex items-center justify-between mb-6">
-                <span id="question-counter" class="text-xs md:text-sm font-semibold tracking-wider text-indigo-600 uppercase bg-indigo-50 px-3 py-1 rounded-full">
-                    Вопрос 1 из 51
-                </span>
-                <div class="flex items-center space-x-3 text-xs md:text-sm font-medium text-gray-500">
-                    <span class="text-emerald-600 bg-emerald-50 px-2.5 py-1 rounded-lg">✅ <span id="score-correct">0</span></span>
-                    <span class="text-rose-600 bg-rose-50 px-2.5 py-1 rounded-lg">❌ <span id="score-errors">0</span></span>
-                </div>
+        <div class="results-screen" id="results-screen">
+            <h2>Тест завершен! 🎉</h2>
+            <div class="results-stats" id="results-stats">
+                <!-- Статистика -->
             </div>
-
-            <!-- Progress Bar -->
-            <div class="w-full bg-gray-100 h-2 rounded-full mb-6 overflow-hidden">
-                <div id="progress-bar" class="bg-indigo-600 h-full transition-all duration-300 rounded-full" style="width: 0%"></div>
-            </div>
-
-            <!-- Question Card -->
-            <div class="bg-gray-50 border border-gray-100 rounded-2xl p-6 mb-6 text-center shadow-sm">
-                <span class="text-xs text-gray-400 uppercase tracking-widest block mb-1">Как переводится слово?</span>
-                <h2 id="current-word" class="text-3xl font-extrabold text-gray-800 tracking-tight">word</h2>
-            </div>
-
-            <!-- Options Grid -->
-            <div id="options-container" class="grid grid-cols-1 gap-3 mb-6">
-                <!-- Dynamically injected options -->
-            </div>
-
-            <!-- Next Button -->
-            <button id="next-btn" onclick="nextQuestion()" class="w-full py-3.5 px-6 bg-gray-900 hover:bg-gray-800 text-white font-semibold rounded-2xl shadow-lg shadow-gray-900/10 transition-all hidden transform active:scale-95">
-                Следующий вопрос ➡️
-            </button>
+            <button class="btn-restart" onclick="restartQuiz()">Пройти заново</button>
         </div>
-
-        <!-- Results Screen (Hidden by default) -->
-        <div id="results-screen" class="hidden text-center py-4 animate-fade-in">
-            <div class="inline-flex items-center justify-center w-20 h-20 bg-emerald-100 text-emerald-600 rounded-3xl mb-4 text-4xl shadow-inner">
-                🏆
-            </div>
-            <h2 class="text-2xl md:text-3xl font-bold text-gray-800 mb-2">Тест завершен!</h2>
-            <p class="text-gray-500 mb-6 text-sm">Отличная работа! Вот твои итоговые результаты прохождения:</p>
-
-            <div class="grid grid-cols-2 gap-4 mb-6">
-                <div class="bg-emerald-50 border border-emerald-100 rounded-2xl p-4">
-                    <span class="block text-xs font-semibold text-emerald-600 uppercase tracking-wider mb-1">Пройдено слов</span>
-                    <span id="res-total" class="text-3xl font-black text-emerald-700">0</span>
-                </div>
-                <div class="bg-rose-50 border border-rose-100 rounded-2xl p-4">
-                    <span class="block text-xs font-semibold text-rose-600 uppercase tracking-wider mb-1">Ошибок допущено</span>
-                    <span id="res-errors" class="text-3xl font-black text-rose-700">0</span>
-                </div>
-            </div>
-
-            <div class="bg-gray-50 border border-gray-100 rounded-2xl p-4 mb-6 text-sm text-gray-600">
-                Процент правильных ответов: <strong id="res-percent" class="text-indigo-600 font-bold">0%</strong>
-            </div>
-
-            <button onclick="restartQuiz()" class="w-full py-3.5 px-6 bg-gradient-to-r from-indigo-600 to-violet-600 hover:from-indigo-700 hover:to-violet-700 text-white font-semibold rounded-2xl shadow-lg shadow-indigo-500/25 transition-all transform active:scale-95">
-                Пройти заново 🔄
-            </button>
-        </div>
-
     </div>
 
     <script>
-        // Полный список слов из воркбука Navigate A2 Unit 9 с переводом
-        const vocabulary = [
+        // Полный словарь из ваших картинок (Unit 9)
+        const rawVocabulary = [
             { en: "bake", ru: "печь, выпекать" },
             { en: "beef", ru: "говядина" },
-            { en: "boil", ru: "варить, кипятить" },
+            { en: "boil", ru: "варить" },
             { en: "bowl", ru: "миска, пиала" },
             { en: "bread", ru: "хлеб" },
             { en: "castle", ru: "замок" },
-            { en: "chicken", ru: "курица, курятина" },
-            { en: "chop", ru: "рубить, резать" },
+            { en: "chicken", ru: "курица" },
+            { en: "chop", ru: "резать, рубить" },
             { en: "cube", ru: "кубик" },
             { en: "delicious", ru: "вкусный" },
             { en: "food processor", ru: "кухонный комбайн" },
@@ -135,47 +243,95 @@
             { en: "knife", ru: "нож" },
             { en: "lemon", ru: "лимон" },
             { en: "lemonade", ru: "лимонад" },
-            { en: "main course", ru: "основное блюдо" },
+            { en: "main course", ru: "главное блюдо" },
             { en: "microwave", ru: "микроволновка" },
             { en: "mix", ru: "смешивать" },
             { en: "mushroom", ru: "гриб" },
             { en: "noodles", ru: "лапша" },
             { en: "olive", ru: "оливка" },
-            { en: "oven", ru: "духовка, печь" },
-            { en: "pasta", ru: "макароны, паста" },
+            { en: "oven", ru: "духовка" },
+            { en: "pasta", ru: "паста, макароны" },
             { en: "pear", ru: "груша" },
             { en: "plate", ru: "тарелка" },
-            { en: "prepare", ru: "готовить, подготавливать" },
+            { en: "prepare", ru: "горотовить, подготавливать" },
             { en: "ready-made", ru: "готовый (о еде)" },
             { en: "rice", ru: "рис" },
-            { en: "roast", ru: "жарить (в духовке, мясо)" },
+            { en: "roast", ru: "запекать, жарить в духовке" },
             { en: "rooftop", ru: "крыша" },
             { en: "salad", ru: "салат" },
             { en: "saucepan", ru: "кастрюля" },
             { en: "secret", ru: "секрет" },
             { en: "spoon", ru: "ложка" },
-            { en: "starter", ru: "закуска (первое блюдо)" },
-            { en: "survey", ru: "опрос, исследование" },
+            { en: "starter", ru: "закуска" },
+            { en: "survey", ru: "опрос" },
             { en: "sweet", ru: "сладкий" },
             { en: "sweetcorn", ru: "кукуруза (сладкая)" },
             { en: "takeaway food", ru: "еда на вынос" },
             { en: "unhealthy", ru: "нездоровый, вредный" },
             { en: "vegetable", ru: "овощ" },
             { en: "view", ru: "вид, пейзаж" },
-            { en: "wonderful", ru: "замечательный, чудесный" },
+            { en: "wonderful", ru: "замечательный" },
             { en: "yoghurt", ru: "йогурт" }
         ];
 
         let questions = [];
         let currentIndex = 0;
-        let correctCount = 0;
         let errorCount = 0;
-        let answered = false;
+        let selectedOptionIndex = null;
+        let isAnswered = false;
 
-        document.getElementById('total-words-count').innerText = vocabulary.length;
+        // Web Audio API для звуков правильного/неправильного ответа
+        const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
 
-        // Перемешивание массива (алгоритм Фишера-Йетса)
-        function shuffleArray(array) {
+        function playSound(type) {
+            if (audioCtx.state === 'suspended') {
+                audioCtx.resume();
+            }
+            const osc = audioCtx.createOscillator();
+            const gain = audioCtx.createGain();
+            osc.connect(gain);
+            gain.connect(audioCtx.destination);
+
+            const now = audioCtx.currentTime;
+
+            if (type === 'correct') {
+                osc.type = 'sine';
+                osc.frequency.setValueAtTime(440, now);
+                osc.frequency.exponentialRampToValueAtTime(880, now + 0.15);
+                gain.gain.setValueAtTime(0.15, now);
+                gain.gain.linearRampToValueAtTime(0.01, now + 0.3);
+                osc.start(now);
+                osc.stop(now + 0.3);
+            } else if (type === 'wrong') {
+                osc.type = 'sawtooth';
+                osc.frequency.setValueAtTime(220, now);
+                osc.frequency.linearRampToValueAtTime(140, now + 0.2);
+                gain.gain.setValueAtTime(0.15, now);
+                gain.gain.linearRampToValueAtTime(0.01, now + 0.3);
+                osc.start(now);
+                osc.stop(now + 0.3);
+            }
+        }
+
+        // Озвучка текста через браузер
+        function speakText(text, lang = 'en-US') {
+            if ('speechSynthesis' in window) {
+                window.speechSynthesis.cancel(); // Остановка предыдущей речи
+                const utterance = new SpeechSynthesisUtterance(text);
+                utterance.lang = lang;
+                utterance.rate = 0.9;
+                window.speechSynthesis.speak(utterance);
+            }
+        }
+
+        function speakCurrentWord() {
+            if (questions[currentIndex]) {
+                speakText(questions[currentIndex].en, 'en-US');
+            }
+        }
+
+        // Перемешивание массива
+        function shuffle(array) {
             let arr = [...array];
             for (let i = arr.length - 1; i > 0; i--) {
                 const j = Math.floor(Math.random() * (i + 1));
@@ -184,89 +340,92 @@
             return arr;
         }
 
-        // Запуск теста
-        function startQuiz() {
-            questions = shuffleArray(vocabulary);
+        function initQuiz() {
+            questions = shuffle(rawVocabulary);
             currentIndex = 0;
-            correctCount = 0;
             errorCount = 0;
-            
-            document.getElementById('welcome-screen').classList.add('hidden');
-            document.getElementById('results-screen').classList.add('hidden');
-            document.getElementById('quiz-screen').classList.remove('hidden');
-            
+            document.getElementById('results-screen').style.display = 'none';
+            document.getElementById('quiz-screen').style.display = 'block';
             loadQuestion();
         }
 
-        // Загрузка текущего вопроса
         function loadQuestion() {
-            answered = false;
-            document.getElementById('next-btn').classList.add('hidden');
-            
-            const currentItem = questions[currentIndex];
-            document.getElementById('current-word').innerText = currentItem.en;
-            document.getElementById('question-counter').innerText = `Вопрос ${currentIndex + 1} из ${questions.length}`;
-            
-            // Расчет прогресса
-            const progressPercent = ((currentIndex) / questions.length) * 100;
-            document.getElementById('progress-bar').style.width = `${progressPercent}%`;
+            selectedOptionIndex = null;
+            isAnswered = false;
+            document.getElementById('btn-next').style.display = 'none';
 
-            // Генерация вариантов (1 правильный + 3 случайных неправильных)
-            let wrongOptions = vocabulary
-                .filter(item => item.ru !== currentItem.ru)
+            const currentQ = questions[currentIndex];
+            document.getElementById('target-word').textContent = currentQ.en;
+            document.getElementById('progress-text').textContent = `Слово: ${currentIndex + 1} / ${questions.length}`;
+            document.getElementById('errors-text').textContent = `Ошибок: ${errorCount}`;
+
+            // Автоматическая озвучка нового слова
+            speakCurrentWord();
+
+            // Создаем варианты ответов (1 правильный + 3 случайных неправильных)
+            let wrongOptions = rawVocabulary
+                .filter(item => item.ru !== currentQ.ru)
                 .map(item => item.ru);
-            
-            wrongOptions = shuffleArray(wrongOptions).slice(0, 3);
-            
-            let options = [...wrongOptions, currentItem.ru];
-            options = shuffleArray(options);
+            wrongOptions = shuffle(wrongOptions).slice(0, 3);
 
-            // Отрисовка кнопок вариантов
-            const optionsContainer = document.getElementById('options-container');
-            optionsContainer.innerHTML = '';
+            let options = [...wrongOptions, currentQ.ru];
+            options = shuffle(options);
 
-            options.forEach(option => {
-                const button = document.createElement('button');
-                button.className = "w-full text-left py-3.5 px-5 bg-white border border-gray-200 hover:border-indigo-300 hover:bg-indigo-50/30 font-medium rounded-2xl transition-all shadow-sm text-gray-700 flex items-center justify-between group";
-                button.innerHTML = `<span>${option}</span> <span class="w-6 h-6 rounded-full border border-gray-300 flex items-center justify-center text-xs text-transparent group-hover:border-indigo-400">✓</span>`;
-                button.onclick = () => selectAnswer(button, option, currentItem.ru);
-                optionsContainer.appendChild(button);
+            const grid = document.getElementById('options-grid');
+            grid.innerHTML = '';
+
+            options.forEach((opt, idx) => {
+                const btn = document.createElement('button');
+                btn.className = 'option-btn';
+                btn.textContent = opt;
+                btn.dataset.index = idx;
+                btn.dataset.text = opt;
+
+                // Клик по варианту ответа
+                btn.onclick = () => handleOptionClick(idx, opt, currentQ.ru, btn);
+                grid.appendChild(btn);
             });
         }
 
-        // Проверка ответа
-        function selectAnswer(buttonElement, selectedOption, correctOption) {
-            if (answered) return;
-            answered = true;
+        function handleOptionClick(idx, chosenText, correctText, btnElement) {
+            if (isAnswered) return;
 
-            const allButtons = document.getElementById('options-container').children;
+            // Озвучиваем выбранный вариант при нажатии
+            speakText(chosenText, 'ru-RU');
 
-            if (selectedOption === correctOption) {
-                buttonElement.className = "w-full text-left py-3.5 px-5 bg-emerald-50 border-2 border-emerald-500 font-semibold rounded-2xl text-emerald-900 flex items-center justify-between shadow-sm transition-all";
-                buttonElement.querySelector('span:last-child').className = "w-6 h-6 rounded-full bg-emerald-500 text-white flex items-center justify-center text-xs font-bold";
-                buttonElement.querySelector('span:last-child').innerText = "✓";
-                correctCount++;
-                document.getElementById('score-correct').innerText = correctCount;
-            } else {
-                buttonElement.className = "w-full text-left py-3.5 px-5 bg-rose-50 border-2 border-rose-500 font-semibold rounded-2xl text-rose-900 flex items-center justify-between shadow-sm transition-all";
-                buttonElement.querySelector('span:last-child').className = "w-6 h-6 rounded-full bg-rose-500 text-white flex items-center justify-center text-xs font-bold";
-                buttonElement.querySelector('span:last-child').innerText = "✕";
-                errorCount++;
-                document.getElementById('score-errors').innerText = errorCount;
+            const buttons = document.querySelectorAll('.option-btn');
 
-                // Подсветим правильный ответ
-                for (let btn of allButtons) {
-                    if (btn.innerText.includes(correctOption)) {
-                        btn.className = "w-full text-left py-3.5 px-5 bg-emerald-50 border-2 border-emerald-500 font-semibold rounded-2xl text-emerald-900 flex items-center justify-between shadow-sm transition-all";
-                    }
+            if (selectedOptionIndex === idx) {
+                // ВТОРОЙ КЛИК — подтверждение выбора
+                isAnswered = true;
+                const isCorrect = (chosenText === correctText);
+
+                if (isCorrect) {
+                    btnElement.classList.add('correct');
+                    playSound('correct');
+                } else {
+                    btnElement.classList.add('wrong');
+                    errorCount++;
+                    playSound('wrong');
+                    // Подсветим правильный ответ
+                    buttons.forEach(b => {
+                        if (b.dataset.text === correctText) {
+                            b.classList.add('correct');
+                        }
+                    });
                 }
-            }
 
-            // Показываем кнопку перехода далее
-            document.getElementById('next-btn').classList.remove('hidden');
+                document.getElementById('errors-text').textContent = `Ошибок: ${errorCount}`;
+                document.getElementById('btn-next').style.display = 'block';
+
+            } else {
+                // ПЕРВЫЙ КЛИК — подсветка выбора
+                buttons.forEach(b => b.classList.remove('selected'));
+                btnElement.classList.add('selected');
+                selectedOptionIndex = idx;
+            }
         }
 
-        // Переход к следующему вопросу или завершение
         function nextQuestion() {
             currentIndex++;
             if (currentIndex < questions.length) {
@@ -276,23 +435,25 @@
             }
         }
 
-        // Экран результатов
         function showResults() {
-            document.getElementById('quiz-screen').classList.add('hidden');
-            document.getElementById('results-screen').classList.remove('hidden');
+            document.getElementById('quiz-screen').style.display = 'none';
+            const resScreen = document.getElementById('results-screen');
+            resScreen.style.display = 'block';
 
-            document.getElementById('res-total').innerText = questions.length;
-            document.getElementById('res-errors').innerText = errorCount;
-
-            const percent = Math.round((correctCount / questions.length) * 100);
-            document.getElementById('res-percent').innerText = `${percent}%`;
+            const passedCount = questions.length;
+            document.getElementById('results-stats').innerHTML = `
+                Ты прошел слов: <b>${passedCount}</b><br>
+                Всего ошибок: <span style="color: var(--danger);"><b>${errorCount}</b></span>
+            `;
+            speakText("Тест завершен! Отличная работа!", "ru-RU");
         }
 
-        // Перезапуск теста
         function restartQuiz() {
-            document.getElementById('results-screen').classList.add('hidden');
-            document.getElementById('welcome-screen').classList.remove('hidden');
+            initQuiz();
         }
+
+        // Запуск при загрузке
+        window.onload = initQuiz;
     </script>
 </body>
 </html>
